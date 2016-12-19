@@ -23,8 +23,10 @@ var Task = React.createClass({
     save: function() {
         // salvar dados do input no state
         var val = this.refs.taskInput.getDOMNode().value;
-        console.log(val, "VALUE");
         this.props.children = val;
+
+        // atualiza as informações no board
+        this.props.onUpdate(this.props.id, val);
 
         // desabilita o modo de edição
         this.setState({editing: false});
@@ -71,6 +73,11 @@ var Task = React.createClass({
     }
 });
 
+
+
+
+
+
 var Board = React.createClass({
     getInitialState: function() {
         return {
@@ -95,6 +102,13 @@ var Board = React.createClass({
         aux_tasks.splice(i, 1);
         this.setState({tasks: aux_tasks});
     },
+    updateTask: function(i, value) {
+        console.log("Update task");
+        console.log(value);
+        var aux_tasks = this.state.tasks;
+        aux_tasks[i] = value;
+        this.setState({tasks: aux_tasks});
+    },
     render: function() {
         var self = this;
         return (
@@ -102,7 +116,9 @@ var Board = React.createClass({
                 <h2 className="board__titulo">Minhas tarefas</h2>
                 {this.state.tasks.map(function(task, i){
                     return (
-                        <Task id={i} onRemove={self.removeTask}>{task}</Task>
+                        <Task id={i} 
+                              onRemove={self.removeTask}
+                              onUpdate={self.updateTask}>{task}</Task>
                     )
                 })}
                 <button className="btn btn-warning glyphicon glyphicon-plus ico-adicionar" onClick={this.addTask.bind(null, "Nova tarefa")}></button>
@@ -111,6 +127,8 @@ var Board = React.createClass({
         );
     }
 })
+
+
 
 React.render(<div>
                 <Board></Board>
