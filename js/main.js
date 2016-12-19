@@ -7,10 +7,10 @@ var Task = React.createClass({
         }
     },
     handleCheck: function() {
-        this.setState({checked: !this.state.checked})
+        this.setState({checked: !this.state.checked});
     },
     handleChange: function(event) {
-        this.setState({value: event.target.value})
+        this.setState({value: event.target.value});
     },
     back: function() {        
         this.setState({editing: false});
@@ -30,7 +30,8 @@ var Task = React.createClass({
         this.setState({editing: false});
     },
     remove: function() {
-        console.log("Remover tarefa");
+        console.log(this.props.id, "Remover tarefa");
+        this.props.onRemove(this.props.id);
     },
     renderDisplay: function() {
         var category = '';
@@ -40,7 +41,7 @@ var Task = React.createClass({
         return (
             <li className="task">
                 <label for="">
-                    <input type="checkbox" defaultChecked={this.state.checked} onChange="{this.handleCheck}" /> 
+                    <input type="checkbox" defaultChecked={this.state.checked} onChange={this.handleCheck} /> 
                     <span id="task-text"> {this.props.children}</span> 
                 </label>
                 {category}                    
@@ -85,16 +86,22 @@ var Board = React.createClass({
         aux_tasks.push(text);
         this.setState({tasks: aux_tasks});
     },
+    removeTask: function(i) {
+        var aux_tasks = this.state.tasks;
+        aux_tasks.splice(i, 1);
+        this.setState({tasks: aux_tasks});
+    },
     render: function() {
+        var self = this;
         return (
             <div className="board">
                 <h2 className="board__titulo">Minhas tarefas</h2>
                 {this.state.tasks.map(function(task, i){
                     return (
-                        <Task id={i}>{task}</Task>
+                        <Task id={i} onRemove={self.removeTask}>{task}</Task>
                     )
                 })}
-                <button className="btn btn-warning glyphicon glyphicon-plus ico-adicionar" onClick={this.addTask}></button>
+                <button className="btn btn-warning glyphicon glyphicon-plus ico-adicionar" onClick={this.addTask.bind(null, "Nova tarefa")}></button>
             </div>
         );
     }
