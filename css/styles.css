@@ -1,0 +1,66 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    padding: 50px;
+}
+
+.task {
+    list-style: none;
+    padding: 2px 5px;
+    transition: all 0.5s;
+}
+.task label {
+    cursor: pointer;
+    color: rgba(0,0,0,0.5);
+}
+.task input {
+    outline: none;
+}
+.task .category {
+    background: orangered;
+    color: white;
+    font-size: 11px;
+    padding: 2px 5px;
+    border-radius: 3px;
+    margin: 0 0 0 5px;
+}
+.task .icon {
+    float: right;
+    text-decoration: none;
+    opacity: 0;
+    margin: 6px 5px 0;
+    transition: all 0.5s;
+    outline: none;
+}
+.task:hover {
+    background: rgba(255,255,255, 0.3);
+}
+.task:hover .icon {
+    opacity: 1;
+}
+
+
+
+
+
+
+
+
+
+.board {
+    width: 500px;
+    margin: 20px;
+    padding: 20px;
+    float: left;
+    background: #ffcc00;
+}
+.board .board__titulo {
+    color: rgba(255,235,130,1);
+}
+.board .ico-adicionar {
+    float: right;
+    margin: 20px 0 0;
+}
