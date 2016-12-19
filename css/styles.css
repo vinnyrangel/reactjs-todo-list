@@ -60,7 +60,8 @@ body {
 .board .board__titulo {
     color: rgba(255,235,130,1);
 }
-.board .ico-adicionar {
+.board .ico-adicionar,
+.board .ico-ver {
     float: right;
-    margin: 20px 0 0;
+    margin: 20px 0 0 10px;
 }

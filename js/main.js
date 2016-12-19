@@ -81,6 +81,10 @@ var Board = React.createClass({
             ]
         }
     },
+    showTasks: function() {
+        console.log("****** TAREFAS ***************");
+        console.log(this.state.tasks);
+    },
     addTask: function(text) {
         var aux_tasks = this.state.tasks; 
         aux_tasks.push(text);
@@ -102,6 +106,7 @@ var Board = React.createClass({
                     )
                 })}
                 <button className="btn btn-warning glyphicon glyphicon-plus ico-adicionar" onClick={this.addTask.bind(null, "Nova tarefa")}></button>
+                <button className="btn btn-warning glyphicon glyphicon-eye-open ico-ver" onClick={this.showTasks}></button>
             </div>
         );
     }
